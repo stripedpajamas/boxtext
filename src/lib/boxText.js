@@ -36,7 +36,7 @@ module.exports = {
   getBoxes(str) {
     return new Promise((resolve, reject) => {
       // sanitize input
-      const input = str && typeof str === 'string' && str.replace(/[^a-z]/ig, '');
+      const input = str && typeof str === 'string' && str.toLowerCase().replace(/[^a-z]/g, '');
       if (!input) {
         reject('Invalid input.');
       }

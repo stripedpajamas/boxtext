@@ -6,7 +6,7 @@ const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 
 const expect = chai.expect;
-const boxText = require('../lib/boxText');
+const boxText = require('../src/lib/boxText');
 
 chai.use(chaiAsPromised);
 
