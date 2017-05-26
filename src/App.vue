@@ -11,7 +11,7 @@
                 </div>
             </div>
         </BoxOutput>
-        <Summary :boxCount="boxCount"></Summary>
+        <BoxSummary :boxCount="boxCountSummary"></BoxSummary>
     </div>
 </template>
 
@@ -19,7 +19,7 @@
     import HeaderComponent from './components/HeaderComponent.vue';
     import TextInput from './components/TextInput.vue';
     import BoxOutput from './components/BoxOutput.vue';
-    import Summary from './components/Summary.vue';
+    import BoxSummary from './components/BoxSummary.vue';
     import boxText from './lib/boxText';
 
     export default {
@@ -27,17 +27,24 @@
       data() {
         return {
           boxes: '',
+          boxConfig: {},
         };
       },
       components: {
         HeaderComponent,
         TextInput,
         BoxOutput,
-        Summary,
+        BoxSummary,
       },
       computed: {
         boxCount() {
           return this.boxes.length;
+        },
+        boxCountSummary() {
+          if (this.boxConfig.boxes && this.boxConfig.boxes.every(box => box.rows === 1)) {
+            return 0;
+          }
+          return this.boxConfig.boxes && this.boxConfig.boxes.length;
         },
         gridStyle() {
           if (this.boxCount <= 2) {
@@ -49,9 +56,11 @@
       methods: {
         processText(input) {
           boxText.getBoxes(input).then((config) => {
+            this.boxConfig = config;
             this.boxes = boxText.arrangeTextInBoxes(config);
           }).catch(() => {
             this.boxes = '';
+            this.boxConfig = {};
           });
         },
       },

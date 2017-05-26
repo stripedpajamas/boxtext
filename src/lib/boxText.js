@@ -9,7 +9,7 @@ module.exports = {
    * @returns {boolean} True if the number is prime, false if it is composite
    */
   primeCheck(n) {
-    if (n <= 1) {
+    if (n < 1) { // consider 1 prime for the purposes of this app
       return false;
     } else if (n <= 3) {
       return true;
