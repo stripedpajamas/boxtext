@@ -3,11 +3,15 @@
  */
 
 const path = require('path');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 module.exports = {
-  entry: './src/main.js',
+  mode: 'production',
+  entry: {
+    app: './src/main.js'
+  },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve('dist'),
     filename: 'bundle.js'
   },
   resolve: {
@@ -19,7 +23,7 @@ module.exports = {
         test: /\.(js|vue)$/,
         use: 'eslint-loader',
         enforce: 'pre',
-        exclude: '/node_modules'
+        include: [path.resolve('src'), path.resolve('test')]
       },
       {
         test: /\.css$/,
@@ -37,8 +41,14 @@ module.exports = {
       {
         test: /\.js$/,
         use: 'babel-loader',
-        exclude: '/node_modules'
+        include: [path.resolve('src'), path.resolve('test')]
       },
     ]
-  }
+  },
+  optimization: {
+    minimize: true,
+  },
+  plugins: [
+    new VueLoaderPlugin(),
+  ],
 };
