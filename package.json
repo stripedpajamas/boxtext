@@ -4,7 +4,8 @@
   "description": "sees if text can be written in a box",
   "scripts": {
     "build": "webpack",
-    "test": "mocha"
+    "test": "mocha",
+    "now-build": "npm run build"
   },
   "author": "peter squicciarini",
   "license": "MIT",

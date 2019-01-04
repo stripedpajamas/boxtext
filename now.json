@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "name": "boxtext",
+  "builds": [
+    {"src": "package.json", "use": "@now/static-build"},
+    {"src": "index.html", "use": "@now/html-minifier"}
+  ]
+}
